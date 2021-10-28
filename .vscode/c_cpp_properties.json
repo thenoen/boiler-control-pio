@@ -26,6 +26,7 @@
                 "/home/marek/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "/home/marek/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                 "/home/marek/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "/home/marek/.platformio/packages/tool-unity",
                 ""
             ],
             "browse": {
@@ -49,6 +50,7 @@
                     "/home/marek/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "/home/marek/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                     "/home/marek/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "/home/marek/.platformio/packages/tool-unity",
                     ""
                 ]
             },
