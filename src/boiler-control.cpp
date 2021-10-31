@@ -87,7 +87,7 @@ void testdrawtext(char *text, uint16_t color);
 void detectTempSensors();
 void drawTemperature(char *text, float temperature, int positionX, int positionY, uint16_t color);
 void drawTemperature2(int i2c_index, float temperature, int positionX, int positionY, uint16_t color);
-void drawWaterLevel(int i2c_index, int digitalInput, int positionX, int positionY, uint16_t color);
+void writeWaterLevelText(int i2c_index, int digitalInput, int positionX, int positionY, uint16_t color);
 void evaluateValve(float temp1, float temp2);
 void activateBoiler();
 const char *indexToDay(uint8_t index);
@@ -570,10 +570,10 @@ void evaluateHeating()
 
 void calculateWaterLevel(DateTime now, Adafruit_ST7735 tft)
 {
-	int digitalInput = analogRead(A_IN_PIN);
+	int digitalInputValue = analogRead(A_IN_PIN);
 
 	int position = currentMeasurement++ % mCount;
-	measuredWaterLevels[position] = digitalInput;
+	measuredWaterLevels[position] = digitalInputValue;
 
 	int sum = 0;
 	for (int i = 0; i < mCount; i++)
@@ -582,12 +582,11 @@ void calculateWaterLevel(DateTime now, Adafruit_ST7735 tft)
 	}
 	int average = sum / mCount;
 
-	drawWaterLevel(4, average, 0, 71, ST77XX_CYAN);
-
-	updateAverage(now, digitalInput, tft);
+	writeWaterLevelText(4, average, 0, 71, ST77XX_CYAN);
+	updateAverage(now, digitalInputValue, tft);
 }
 
-void drawWaterLevel(int i2c_index, int digitalInput, int positionX, int positionY, uint16_t color)
+void writeWaterLevelText(int i2c_index, int digitalInput, int positionX, int positionY, uint16_t color)
 {
 
 	int16_t x, y;

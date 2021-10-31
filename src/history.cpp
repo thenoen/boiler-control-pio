@@ -1,5 +1,7 @@
 #include "history.h"
 
+#include "generator.h"
+
 #define COLOR_GRAY 0x83EF
 const int historySize = 64;
 int history_data[historySize] = {};
@@ -22,6 +24,12 @@ void updateAverage(DateTime now, int newVal, Adafruit_ST7735 tft) {
   uint32_t modSeconds = secondsNow % (3600 * 6);
   // uint32_t modSeconds = secondsNow % (5); // for tuning only
   uint32_t newInstant = secondsNow - modSeconds;
+
+
+  // INVESTIGATION
+	int digitalInputValue = sinShrink();
+  shiftInstant = 0;
+  ////////////////
 
   if (shiftInstant == 0 || shiftInstant != newInstant) {
     if (numberOfShifts < 2) {

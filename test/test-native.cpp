@@ -44,13 +44,32 @@ void sinGrow()
     fclose(file);
 }
 
+void sinShrinkTest()
+{
+    FILE *file = fopen("/tmp/pio.txt", "w");
+
+    // fputs("abc\n", file);
+
+    for (int i = 0; i < 100; i++)
+    {
+        int nextValue = sinShrink();
+        fprintf(file, "%d", i);
+        fputs(",", file);
+        fprintf(file, "%d", nextValue);
+        fputs("\n", file);
+    }
+
+    fclose(file);
+}
+
 int main(int argc, char **argv)
 {
     UNITY_BEGIN();
     RUN_TEST(test_function_calculator_addition);
     UNITY_END();
 
-    sinGrow();
+    // sinGrow();
+    sinShrinkTest();
 
     return 0;
 }
