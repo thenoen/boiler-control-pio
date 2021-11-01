@@ -3,6 +3,8 @@
 #include "generator.h"
 
 #define COLOR_GRAY 0x83EF
+#define COLOR_DARK_GRAY 0x4208
+
 const int historySize = 64;
 int history_data[historySize] = {-1};
 float current_average = 0.0;
@@ -11,7 +13,7 @@ uint32_t shiftInstant = 0;
 int numberOfShifts = 0;
 
 // ====== Drawing parameters ======
-const int TOP_OF_CHART = 77;
+const int TOP_OF_CHART = 76;
 const int SHIFT = 62;
 const int min = 140;
 const int max = 165;
@@ -207,7 +209,7 @@ void drawChart(Adafruit_ST7735 tft, int minValueOfChart, int maxValueOfChart, in
   {
     if (i % 10 == 0)
     {
-      tft.drawFastHLine(0, measurementToPosition(i) - shiftBeforePrint, 134, ST7735_WHITE);
+      tft.drawFastHLine(0, measurementToPosition(i) - shiftBeforePrint, 134, COLOR_GRAY);
       tft.setCursor(135, measurementToPosition(i) - shiftBeforePrint);
       if (i != maxValueOfChart)
       {
@@ -217,7 +219,7 @@ void drawChart(Adafruit_ST7735 tft, int minValueOfChart, int maxValueOfChart, in
     }
     else
     {
-      tft.drawFastHLine(0, measurementToPosition(i) - shiftBeforePrint, 131, COLOR_GRAY);
+      tft.drawFastHLine(0, measurementToPosition(i) - shiftBeforePrint, 131, COLOR_DARK_GRAY);
       // Serial.print("b - ");
     }
 
@@ -230,6 +232,6 @@ void drawChart(Adafruit_ST7735 tft, int minValueOfChart, int maxValueOfChart, in
   // X-axis
   for (int i = 128; i >= 0; i -= 8)
   {
-    tft.drawFastVLine(i, TOP_OF_CHART, 127 - TOP_OF_CHART, COLOR_GRAY);
+    tft.drawFastVLine(i, TOP_OF_CHART, 127 - TOP_OF_CHART, COLOR_DARK_GRAY);
   }
 }
