@@ -10,6 +10,7 @@
             "includePath": [
                 "/home/marek/Projects/boiler-control-pio/include",
                 "/home/marek/Projects/boiler-control-pio/src",
+                "/home/marek/Projects/boiler-control-pio/lib/generator",
                 "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit ST7735 and ST7789 Library",
                 "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit GFX Library",
                 "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit BusIO",
@@ -20,7 +21,6 @@
                 "/home/marek/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                 "/home/marek/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "/home/marek/.platformio/packages/framework-arduino-avr/variants/standard",
-                "/home/marek/Projects/boiler-control-pio/lib/generator",
                 "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit seesaw Library",
                 "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/SD",
                 "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/TinyWireM",
@@ -35,6 +35,7 @@
                 "path": [
                     "/home/marek/Projects/boiler-control-pio/include",
                     "/home/marek/Projects/boiler-control-pio/src",
+                    "/home/marek/Projects/boiler-control-pio/lib/generator",
                     "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit ST7735 and ST7789 Library",
                     "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit GFX Library",
                     "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit BusIO",
@@ -45,7 +46,6 @@
                     "/home/marek/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
                     "/home/marek/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "/home/marek/.platformio/packages/framework-arduino-avr/variants/standard",
-                    "/home/marek/Projects/boiler-control-pio/lib/generator",
                     "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit seesaw Library",
                     "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/SD",
                     "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/TinyWireM",

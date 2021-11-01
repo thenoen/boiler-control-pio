@@ -157,7 +157,7 @@ void setup(void)
 
 void loop()
 {
-	long start = micros();
+	// long start = micros();
 	delay(500);
 
 	sensors.requestTemperatures();
@@ -600,7 +600,7 @@ void writeWaterLevelText(int i2c_index, int digitalInput, int positionX, int pos
 	float depth = ((voltage - 0.5) * 1000000) / (8 * WATER_DENSITY * GRAVITATIONAL_ACCELERATION);
 	dtostrf(depth, 4, 2, textDepth);
 
-	sprintf(result, "%s%sm (%sV) [%d]", previousTemperature[i2c_index][0], textDepth, textVoltage, digitalInput);
+	sprintf(result, "%s%sm  %sV  %d", previousTemperature[i2c_index][0], textDepth, textVoltage, digitalInput);
 
 	int cmpTemp = scmp(previousTemperature[i2c_index][1], result);
 
