@@ -6,11 +6,10 @@
 #define COLOR_DARK_GRAY 0x4208
 
 const int historySize = 64;
-int history_data[historySize] = {-1};
+int history_data[historySize] = {};
 float current_average = 0.0;
 int measurements_count = 0;
 uint32_t shiftInstant = 0;
-int numberOfShifts = 0;
 
 // ====== Drawing parameters ======
 const int TOP_OF_CHART = 76;
@@ -25,7 +24,7 @@ void updateAverage(DateTime now, int newVal, Adafruit_ST7735 tft)
 
   uint32_t secondsNow = now.secondstime();
   uint32_t modSeconds = secondsNow % (3600 * 6);
-  // uint32_t modSeconds = secondsNow % (1); // for tuning only
+  // uint32_t modSeconds = secondsNow % (5); // for tuning only
   uint32_t newInstant = secondsNow - modSeconds;
 
   // INVESTIGATION
