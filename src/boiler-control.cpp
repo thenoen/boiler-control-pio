@@ -51,8 +51,8 @@ int activeBoiler = -1;
 int boilerToActivate = -1;
 int activationInProgress = 0;
 uint32_t boilerActivationTime;
-int VALVE_SWITCH_TEMPERATURE = 4; // temperature difference between boilers for valve switching
-int VALVE_SWITCH_DURATION = 60;	  //duration of impulse for switching of valve in seconds
+int VALVE_SWITCH_TEMPERATURE = 1; // temperature difference between boilers for valve switching
+int VALVE_SWITCH_DURATION = 60;	  // duration of impulse for switching of valve in seconds
 
 #define ONE_WIRE_BUS 2
 // Setup a oneWire instance to communicate with any OneWire device
@@ -65,7 +65,7 @@ char previousText[3][30];
 int PREV_TIME = 1;
 int PREV_DATE = 2;
 
-char previousTemperature[5][3][30]; //todo: rename to 'previousText'
+char previousTemperature[5][3][30]; // todo: rename to 'previousText'
 
 // ============== WATER LEVEL MEASUREMENT =====================================
 
@@ -140,14 +140,17 @@ void setup(void)
 		// for example to set January 27 2017 at 12:56 you would call:
 		// rtc.adjust(DateTime(2017, 1, 27, 12, 56, 0));
 	}
+		// rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
 
 	pinMode(BOILER1_PIN, OUTPUT);
+	digitalWrite(BOILER1_PIN, LOW);
 	pinMode(BOILER2_PIN, OUTPUT);
+	digitalWrite(BOILER2_PIN, LOW);
 	pinMode(B2_HEATING_PIN, OUTPUT);
 	pinMode(EXTRA_PIN, OUTPUT);
 	//	activateBoiler(); // should not be needed here
 
-	//	detectTempSensors();
+		// detectTempSensors();
 	//	strcpy(textHistory['time'], "empty");
 	//	strcpy(textHistory['date'], "empty");
 	strcpy(previousTemperature[BOILER1_I2C_INDEX][0], "B1");
@@ -163,9 +166,9 @@ void loop()
 	sensors.requestTemperatures();
 
 	float boiler1Temperature = sensors.getTempCByIndex(BOILER1_I2C_INDEX);
-	//	boiler1Temperature = sensors.getTempC(BOILER1_I2C_ADDRESS);
+		// boiler1Temperature = sensors.getTempC(BOILER1_I2C_ADDRESS);
 	float boiler2Temperature = sensors.getTempCByIndex(BOILER2_I2C_INDEX);
-	//	boiler2Temperature = sensors.getTempC(BOILER2_I2C_ADDRESS);
+		// boiler2Temperature = sensors.getTempC(BOILER2_I2C_ADDRESS);
 	float panelTemperature = sensors.getTempCByIndex(PANEL_I2C_INDEX);
 
 	//	Serial.print("temperature: ");
@@ -312,7 +315,7 @@ void drawDateTime(DateTime now)
 	{
 		tft.setCursor(DATE_TIME_X + w, DATE_TIME_Y);
 		strcpy(previousText[PREV_DATE], resultText);
-		tft.getTextBounds(resultText, DATE_TIME_X + w, DATE_TIME_Y, &x, &y, &w, &h); //todo: why +w ???
+		tft.getTextBounds(resultText, DATE_TIME_X + w, DATE_TIME_Y, &x, &y, &w, &h); // todo: why +w ???
 		tft.fillRect(x - 1, y, w + 1, h, ST77XX_BLACK);								 // "-1" is for fixing of calculation of text rectangle
 		tft.print(resultText);
 	}
@@ -330,17 +333,20 @@ void detectTempSensors()
 	tft.setTextWrap(true);
 	tft.setCursor(0, 15);
 
-	char result[50];
+	char result[30];
 	sprintf(result, "count: %d", deviceCount);
 	testdrawtext(result, ST7735_BLUE);
+	Serial.println(result);
 
 	sensors.getAddress(BOILER1_I2C_ADDRESS, BOILER1_I2C_INDEX);
 	sprintf(result, "b1: %d", BOILER1_I2C_ADDRESS);
 	testdrawtext(result, ST7735_BLUE);
+	Serial.println(result);
 
 	sensors.getAddress(BOILER2_I2C_ADDRESS, BOILER2_I2C_INDEX);
 	sprintf(result, "b2: %d", BOILER2_I2C_ADDRESS);
 	testdrawtext(result, ST7735_BLUE);
+	Serial.println(result);
 	delay(5000);
 }
 
@@ -452,7 +458,7 @@ void printTemperatureSensorsToSerial()
 		Serial.print(" : ");
 		temperature = sensors.getTempCByIndex(i);
 		Serial.print(temperature);
-		Serial.print((char)176); //shows degrees character
+		Serial.print((char)176); // shows degrees character
 		Serial.println("C");
 	}
 }
@@ -492,6 +498,17 @@ void activateBoiler()
 {
 	if (activeBoiler != boilerToActivate)
 	{
+		if (activeBoiler != -1)
+		{
+			digitalWrite(activeBoiler, LOW);
+		}
+		digitalWrite(boilerToActivate, HIGH);
+		activeBoiler = boilerToActivate;
+	}
+
+	/*
+	if (activeBoiler != boilerToActivate)
+	{
 		// Serial.println("activation in progress");
 		activationInProgress = 1;
 	}
@@ -522,6 +539,7 @@ void activateBoiler()
 		digitalWrite(boilerToActivate, HIGH);
 	}
 	// Serial.println(boilerToActivate);
+	*/
 }
 
 const char *indexToDay(uint8_t index)

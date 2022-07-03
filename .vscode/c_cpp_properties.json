@@ -24,10 +24,10 @@
                 "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit seesaw Library",
                 "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/SD",
                 "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/TinyWireM",
+                "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Unity/src",
                 "/home/marek/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "/home/marek/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                 "/home/marek/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                "/home/marek/.platformio/packages/tool-unity",
                 ""
             ],
             "browse": {
@@ -49,15 +49,15 @@
                     "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Adafruit seesaw Library",
                     "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/SD",
                     "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/TinyWireM",
+                    "/home/marek/Projects/boiler-control-pio/.pio/libdeps/uno/Unity/src",
                     "/home/marek/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "/home/marek/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                     "/home/marek/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                    "/home/marek/.platformio/packages/tool-unity",
                     ""
                 ]
             },
             "defines": [
-                "PLATFORMIO=50202",
+                "PLATFORMIO=60002",
                 "ARDUINO_AVR_UNO",
                 "F_CPU=16000000L",
                 "ARDUINO_ARCH_AVR",
