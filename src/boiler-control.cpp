@@ -24,7 +24,7 @@
  * 		1	-
  * 		2	encoder interrupt
  * 		3	encoder interrupt
- * 		4 	! used in code but not wired
+ * 		4 	i2c bus - thermometers
  * 		5	boiler control - scheduling of heating
  * 		6	boiler control - switching of water output
  * 		7	boiler control - switching of water output
@@ -32,7 +32,7 @@
  * 		9	TFT display
  * 		10	TFT display
  * 		11	TFT display
- * 		12	i2c bus - thermometers
+ * 		12	- not explicitely used but does not work with i2c thermometers
  * 		13	TFT display
  * 
  *  Pins supportig hardware interrupts: 2, 3
@@ -66,7 +66,6 @@ uint8_t *BOILER2_I2C_ADDRESS = new uint8_t[8];
 int BOILER1_PIN = 6;
 int BOILER2_PIN = 7;
 int B2_HEATING_PIN = 5;
-int EXTRA_PIN = 4;
 
 int PANEL_I2C_INDEX = 2;
 
@@ -77,14 +76,14 @@ uint32_t boilerActivationTime;
 int VALVE_SWITCH_TEMPERATURE = 1; // temperature difference between boilers for valve switching
 int VALVE_SWITCH_DURATION = 60;	  // duration of impulse for switching of valve in seconds
 
-#define ONE_WIRE_BUS 12
+#define ONE_WIRE_BUS 4
 // Setup a oneWire instance to communicate with any OneWire device
 OneWire oneWire(ONE_WIRE_BUS);
 // Pass oneWire reference to DallasTemperature library
 DallasTemperature sensors(&oneWire);
 int deviceCount = 0;
 
-char previousText[2][12];
+char previousText[3][30];
 int PREV_TIME = 1;
 int PREV_DATE = 2;
 
@@ -173,7 +172,6 @@ void setup(void)
 	pinMode(BOILER2_PIN, OUTPUT);
 	digitalWrite(BOILER2_PIN, LOW);
 	pinMode(B2_HEATING_PIN, OUTPUT);
-	pinMode(EXTRA_PIN, OUTPUT);
 	//	activateBoiler(); // should not be needed here
 
 		// detectTempSensors();
@@ -222,11 +220,6 @@ void loop()
 
 	// output pin - not yet determined what it will be used for
 	//	uint8_t second = rtc.now().second();
-	//	if ((second % 10) == 0) {
-	//		digitalWrite(EXTRA_PIN, HIGH);
-	//	} else {
-	//		digitalWrite(EXTRA_PIN, LOW);
-	//	}
 
 	toggleProgressIndicator(tft);
 
@@ -409,7 +402,7 @@ void drawTemperature2(int i2c_index, float temperature, int positionX, int posit
 
 	int16_t x, y;
 	uint16_t w, h;
-	char textToPrint[30];
+	char textToPrint[50];
 	char temperatureAsString[10];
 	char cmpColor[3];
 
@@ -637,7 +630,7 @@ void writeWaterLevelText(int i2c_index, int digitalInput, int positionX, int pos
 
 	int16_t x, y;
 	uint16_t w, h;
-	char result[30];
+	char result[50];
 	char textVoltage[10];
 	char textDepth[10];
 
