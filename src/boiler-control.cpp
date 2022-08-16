@@ -9,7 +9,7 @@
 #include <Adafruit_GFX.h>	 // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library for ST7735
 #include <SPI.h>
-#include "custom-font.h"
+// #include "custom-font.h" //not used
 #include "custom-font-7p.h"
 
 #include "free_memory.h"
@@ -84,7 +84,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 int deviceCount = 0;
 
-char previousText[2][30];
+char previousText[2][12];
 int PREV_TIME = 1;
 int PREV_DATE = 2;
 
