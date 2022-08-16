@@ -19,7 +19,7 @@
 /*
  * Used Arduino pins
  * 
- * 		DIGITAL
+ * 		DIGITAL (the same as printed on the board)
  * 		0	-
  * 		1	-
  * 		2	i2c bus - thermometers // !!! conflict with interrupts
@@ -84,7 +84,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 int deviceCount = 0;
 
-char previousText[3][30];
+char previousText[2][30];
 int PREV_TIME = 1;
 int PREV_DATE = 2;
 
@@ -145,13 +145,13 @@ void setup(void)
 
 	if (!b)
 	{
-		Serial.println("RTC problem");
+		// Serial.println("RTC problem");
 		while (1)
 			;
 	}
 	else
 	{
-		Serial.println("RTC ok");
+		// Serial.println("RTC ok");
 	}
 
 	if (rtc.lostPower())
@@ -404,7 +404,7 @@ void drawTemperature2(int i2c_index, float temperature, int positionX, int posit
 
 	int16_t x, y;
 	uint16_t w, h;
-	char textToPrint[50];
+	char textToPrint[30];
 	char temperatureAsString[10];
 	char cmpColor[3];
 
@@ -632,7 +632,7 @@ void writeWaterLevelText(int i2c_index, int digitalInput, int positionX, int pos
 
 	int16_t x, y;
 	uint16_t w, h;
-	char result[50];
+	char result[30];
 	char textVoltage[10];
 	char textDepth[10];
 
