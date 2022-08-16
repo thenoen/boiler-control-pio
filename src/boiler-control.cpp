@@ -22,8 +22,8 @@
  * 		DIGITAL (the same as printed on the board)
  * 		0	-
  * 		1	-
- * 		2	i2c bus - thermometers // !!! conflict with interrupts
- * 		3	-
+ * 		2	encoder interrupt
+ * 		3	encoder interrupt
  * 		4 	! used in code but not wired
  * 		5	boiler control - scheduling of heating
  * 		6	boiler control - switching of water output
@@ -32,7 +32,7 @@
  * 		9	TFT display
  * 		10	TFT display
  * 		11	TFT display
- * 		12	-
+ * 		12	i2c bus - thermometers
  * 		13	TFT display
  * 
  *  Pins supportig hardware interrupts: 2, 3
@@ -77,7 +77,7 @@ uint32_t boilerActivationTime;
 int VALVE_SWITCH_TEMPERATURE = 1; // temperature difference between boilers for valve switching
 int VALVE_SWITCH_DURATION = 60;	  // duration of impulse for switching of valve in seconds
 
-#define ONE_WIRE_BUS 2
+#define ONE_WIRE_BUS 12
 // Setup a oneWire instance to communicate with any OneWire device
 OneWire oneWire(ONE_WIRE_BUS);
 // Pass oneWire reference to DallasTemperature library
@@ -119,6 +119,9 @@ void evaluateHeating();
 boolean isErrorTemperature(float temperature);
 int scmp(const char *X, const char *Y);
 void calculateWaterLevel(DateTime now, Adafruit_ST7735 tft);
+
+#include <Encoder.h>
+Encoder myEnc(2,3);
 
 void setup(void)
 {
@@ -179,6 +182,8 @@ void setup(void)
 	strcpy(previousTemperature[BOILER1_I2C_INDEX][0], "B1");
 	strcpy(previousTemperature[BOILER2_I2C_INDEX][0], "B2");
 	strcpy(previousTemperature[PANEL_I2C_INDEX][0], "T3");
+
+	myEnc.read();
 }
 
 void loop()
