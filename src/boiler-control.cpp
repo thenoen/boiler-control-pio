@@ -22,8 +22,8 @@
  * 		DIGITAL (the same as printed on the board)
  * 		0	-
  * 		1	-
- * 		2	i2c bus - thermometers // !!! conflict with interrupts
- * 		3	-
+ * 		2	encoder interrupt
+ * 		3	encoder interrupt
  * 		4 	! used in code but not wired
  * 		5	boiler control - scheduling of heating
  * 		6	boiler control - switching of water output
@@ -32,7 +32,7 @@
  * 		9	TFT display
  * 		10	TFT display
  * 		11	TFT display
- * 		12	-
+ * 		12	i2c bus - thermometers
  * 		13	TFT display
  * 
  *  Pins supportig hardware interrupts: 2, 3
@@ -68,7 +68,7 @@ int BOILER2_PIN = 7;
 int B2_HEATING_PIN = 5;
 int EXTRA_PIN = 4;
 
-int PANEL_I2C_INDEX = 2;
+int PANEL_I2C_INDEX = 12;
 
 int activeBoiler = -1;
 int boilerToActivate = -1;
