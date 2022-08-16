@@ -120,6 +120,9 @@ boolean isErrorTemperature(float temperature);
 int scmp(const char *X, const char *Y);
 void calculateWaterLevel(DateTime now, Adafruit_ST7735 tft);
 
+#include <Encoder.h>
+Encoder myEnc(2,3);
+
 void setup(void)
 {
 	sensors.begin(); // Start up the library
@@ -179,6 +182,8 @@ void setup(void)
 	strcpy(previousTemperature[BOILER1_I2C_INDEX][0], "B1");
 	strcpy(previousTemperature[BOILER2_I2C_INDEX][0], "B2");
 	strcpy(previousTemperature[PANEL_I2C_INDEX][0], "T3");
+
+	myEnc.read();
 }
 
 void loop()
