@@ -16,6 +16,29 @@
 #include "progress.h"
 #include "history.h"
 
+/*
+ * Used Arduino pins
+ * 
+ * 		DIGITAL
+ * 		0	-
+ * 		1	-
+ * 		2	i2c bus - thermometers // !!! conflict with interrupts
+ * 		3	-
+ * 		4 	! used in code but not wired
+ * 		5	boiler control - scheduling of heating
+ * 		6	boiler control - switching of water output
+ * 		7	boiler control - switching of water output
+ * 		8	TFT display
+ * 		9	TFT display
+ * 		10	TFT display
+ * 		11	TFT display
+ * 		12	-
+ * 		13	TFT display
+ * 
+ *  Pins supportig hardware interrupts: 2, 3
+ * 
+ */
+
 #define TFT_CS 10
 #define TFT_RST 8 // Or set to -1 and connect to Arduino RESET pin
 #define TFT_DC 9
