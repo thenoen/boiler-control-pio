@@ -68,7 +68,7 @@ int BOILER2_PIN = 7;
 int B2_HEATING_PIN = 5;
 int EXTRA_PIN = 4;
 
-int PANEL_I2C_INDEX = 12;
+int PANEL_I2C_INDEX = 2;
 
 int activeBoiler = -1;
 int boilerToActivate = -1;
@@ -77,7 +77,7 @@ uint32_t boilerActivationTime;
 int VALVE_SWITCH_TEMPERATURE = 1; // temperature difference between boilers for valve switching
 int VALVE_SWITCH_DURATION = 60;	  // duration of impulse for switching of valve in seconds
 
-#define ONE_WIRE_BUS 2
+#define ONE_WIRE_BUS 12
 // Setup a oneWire instance to communicate with any OneWire device
 OneWire oneWire(ONE_WIRE_BUS);
 // Pass oneWire reference to DallasTemperature library
