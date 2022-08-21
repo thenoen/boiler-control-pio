@@ -119,8 +119,16 @@ boolean isErrorTemperature(float temperature);
 int scmp(const char *X, const char *Y);
 void calculateWaterLevel(DateTime now, Adafruit_ST7735 tft);
 
-#include <Encoder.h>
-Encoder myEnc(2,3);
+// #include <Encoder.h>
+// Encoder myEnc(2,3);
+#define PIN_IN1 2
+#define PIN_IN2 3
+#include <RotaryEncoder.h>
+RotaryEncoder *encoder = nullptr;
+void checkPosition()
+{
+  encoder->tick(); // just call tick() to check the state.
+}
 
 void setup(void)
 {
@@ -181,7 +189,9 @@ void setup(void)
 	strcpy(previousTemperature[BOILER2_I2C_INDEX][0], "B2");
 	strcpy(previousTemperature[PANEL_I2C_INDEX][0], "T3");
 
-	myEnc.read();
+	encoder = new RotaryEncoder(PIN_IN1, PIN_IN2, RotaryEncoder::LatchMode::TWO03);
+	attachInterrupt(digitalPinToInterrupt(PIN_IN1), checkPosition, CHANGE);
+  	attachInterrupt(digitalPinToInterrupt(PIN_IN2), checkPosition, CHANGE);
 }
 
 void loop()
@@ -609,8 +619,13 @@ void evaluateHeating()
 
 void calculateWaterLevel(DateTime now, Adafruit_ST7735 tft)
 {
-	int digitalInputValue = analogRead(A_IN_PIN);
+	// int digitalInputValue = analogRead(A_IN_PIN);
+	// int digitalInputValue = myEnc.read();
+	encoder->tick(); // just call tick() to check the state.
 
+  	int digitalInputValue = encoder->getPosition();
+
+/*
 	int position = currentMeasurement++ % mCount;
 	measuredWaterLevels[position] = digitalInputValue;
 
@@ -620,8 +635,10 @@ void calculateWaterLevel(DateTime now, Adafruit_ST7735 tft)
 		sum += measuredWaterLevels[i];
 	}
 	int average = sum / mCount;
-
-	writeWaterLevelText(4, average, 0, 71, ST77XX_CYAN);
+	*/
+	
+	// writeWaterLevelText(4, average, 0, 71, ST77XX_CYAN);
+	writeWaterLevelText(4, digitalInputValue, 0, 71, ST77XX_CYAN);
 	updateAverage(now, digitalInputValue, tft);
 }
 
@@ -634,12 +651,15 @@ void writeWaterLevelText(int i2c_index, int digitalInput, int positionX, int pos
 	char textVoltage[10];
 	char textDepth[10];
 
+/*
 	float voltage = digitalInput * DA_RATIO; //- 0.075;
 	dtostrf(voltage, 5, 3, textVoltage);
 	float depth = ((voltage - 0.5) * 1000000) / (8 * WATER_DENSITY * GRAVITATIONAL_ACCELERATION);
 	dtostrf(depth, 4, 2, textDepth);
 
 	sprintf(result, "%s%sm  %sV  %d", previousTemperature[i2c_index][0], textDepth, textVoltage, digitalInput);
+*/
+	sprintf(result, "%d", digitalInput);
 
 	int cmpTemp = scmp(previousTemperature[i2c_index][1], result);
 

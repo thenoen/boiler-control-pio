@@ -23,8 +23,8 @@ void updateAverage(DateTime now, int newVal, Adafruit_ST7735 tft)
 {
 
   uint32_t secondsNow = now.secondstime();
-  uint32_t modSeconds = secondsNow % (3600 * 6);
-  // uint32_t modSeconds = secondsNow % (5); // for tuning only
+  // uint32_t modSeconds = secondsNow % (3600 * 6);
+  uint32_t modSeconds = secondsNow % (5); // for tuning only
   uint32_t newInstant = secondsNow - modSeconds;
 
   // INVESTIGATION
